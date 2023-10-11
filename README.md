@@ -1,1 +1,10 @@
 # data_collection_challenge
+In the given challenge, I began by scraping data from a Mars news website to retrieve the titles and preview text of articles. I used the ‘splinter’ library to navigate the website and ‘BeautifulSoup’ for parsing the webpage's HTML content. 
+
+The code bs_object.find_all('div','content_title') helped me extract all article titles, and the following line, text_preview_elements = [[title, title.find_next_sibling('div', 'article_teaser_body')] for title in titles], helped me associate each title with its corresponding preview text. I stored the paired title and preview text in a list of dictionaries for better organization.
+
+After successfully scraping the news data, I shifted focus to another task: scraping and analyzing Mars weather data. I visited a website that contained a table of Mars' temperature data. Using ‘BeautifulSoup’, I extracted each row from the table using the code rows = bs_object.find_all('tr', 'data-row'). Once I had all the data rows, I processed this information to create a list of lists that was then converted into a pandas DataFrame for more sophisticated data analysis. To ensure the data types of each column were accurate for the intended analyses, I explicitly changed the data types with the ‘astype()’ method.
+
+With the data in the desired format, I proceeded to answer specific questions about Mars' weather. For instance, I determined the number of Martian months in the data using the ‘value_counts()’ method and ascertained the number of Martian days' worth of data by inspecting the DataFrame's shape. I also computed the average low temperature and pressure for each Martian month using the ‘groupby()’ method combined with aggregation functions like ‘mean()’. I further visualized this information with bar plots to identify patterns more easily. Specifically, I used df_changed.groupby(by="month")["min_temp"].mean().plot(x="month", kind="bar", title="average of minimum temperatures of each month") to graphically represent the average minimum temperatures for each month.
+
+Lastly, I saved the modified DataFrame to a CSV file.
